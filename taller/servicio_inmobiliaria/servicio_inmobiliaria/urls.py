@@ -9,7 +9,7 @@ router.register(r'edificios', EdificioViewSet)
 router.register(r'departamentos', DepartamentoViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-token-auth/', drf_views.obtain_auth_token),
 ]
