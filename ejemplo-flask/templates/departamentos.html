@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamentos - Sistema Inmobiliario</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Departamentos</h1>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Volver al Inicio</a>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Propietario</th>
+                        <th>Costo</th>
+                        <th>Número de Cuartos</th>
+                        <th>Edificio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for departamento in departamentos %}
+                    <tr>
+                        <td>{{ departamento.id }}</td>
+                        <td>{{ departamento.nombre_propietario }}</td>
+                        <td>${{ departamento.costo }}</td>
+                        <td>{{ departamento.numero_cuartos }}</td>
+                        <td>{{ departamento.edificio }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No hay departamentos disponibles</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

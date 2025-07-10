@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Inmobiliario</title>
+    
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Sistema de Gestión Inmobiliaria</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edificios y departamentos</h5>
+                        <p class="card-text">Gestiona los edificios del sistema</p>
+                        <a href="{{ url_for('los_edificios') }}" class="btn btn-primary">Ver Edificios</a>
+                        <a href="{{ url_for('los_departamentos') }}" class="btn btn-primary">Ver Departamentos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edificios - Sistema Inmobiliario</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Edificios</h1>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Volver al Inicio</a>
+        
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for edificio in edificios %}
+                    <tr>
+                        <td>{{ edificio.id }}</td>
+                        <td>{{ edificio.nombre }}</td>
+                        <td>{{ edificio.direccion }}</td>
+                        <td>{{ edificio.ciudad }}</td>
+                        <td>{{ edificio.tipo }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No hay edificios disponibles</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
