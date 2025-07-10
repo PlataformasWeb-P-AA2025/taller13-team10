@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Departamento</title>
+</head>
+<body>
+    <h1>{% if departamento and departamento.nombre_propietario %}Editar Departamento{% else %}Crear Departamento{% endif %}</h1>
+    <form method="post">
+        <label>Propietario:</label>
+        <input type="text" name="nombre_propietario" value="{{ departamento.nombre_propietario if departamento.nombre_propietario is defined else '' }}"><br>
+        <label>Costo:</label>
+        <input type="number" step="0.01" name="costo" value="{{ departamento.costo if departamento.costo is defined else '' }}"><br>
+        <label>Número de Cuartos:</label>
+        <input type="number" name="numero_cuartos" value="{{ departamento.numero_cuartos if departamento.numero_cuartos is defined else '' }}"><br>
+        <label>Edificio:</label>
+        <select name="edificio">
+            {% for edificio in edificios %}
+            <option value="{{ edificio.id }}" {% if departamento.edificio == edificio.id or departamento.edificio == edificio.url %}selected{% endif %}>{{ edificio.nombre }}</option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Volver al Inicio</a>
+</body>
+</html>

@@ -27,20 +27,29 @@
                         <th>Costo</th>
                         <th>Número de Cuartos</th>
                         <th>Edificio</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for departamento in departamentos %}
                     <tr>
-                        <td>{{ departamento.id }}</td>
+                        <td>{{ departamento.id if departamento.id is defined else '' }}</td>
                         <td>{{ departamento.nombre_propietario }}</td>
                         <td>${{ departamento.costo }}</td>
                         <td>{{ departamento.numero_cuartos }}</td>
                         <td>{{ departamento.edificio }}</td>
+                        <td>
+                            {% if departamento.id is defined %}
+                            <a href="{{ url_for('editar_departamento', departamento_id=departamento.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ url_for('eliminar_departamento', departamento_id=departamento.id) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este departamento?');">Eliminar</button>
+                            </form>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5" class="text-center">No hay departamentos disponibles</td>
+                        <td colspan="6" class="text-center">No hay departamentos disponibles</td>
                     </tr>
                     {% endfor %}
                 </tbody>

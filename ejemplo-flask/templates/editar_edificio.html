@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Edificio</title>
+</head>
+<body>
+    <h1>{% if edificio and edificio.nombre %}Editar Edificio{% else %}Crear Edificio{% endif %}</h1>
+    <form method="post">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="{{ edificio.nombre if edificio.nombre is defined else '' }}"><br>
+        <label>Dirección:</label>
+        <input type="text" name="direccion" value="{{ edificio.direccion if edificio.direccion is defined else '' }}"><br>
+        <label>Ciudad:</label>
+        <input type="text" name="ciudad" value="{{ edificio.ciudad if edificio.ciudad is defined else '' }}"><br>
+        <label>Tipo:</label>
+        <select name="tipo">
+            <option value="residencial" {% if edificio.tipo == "residencial" %}selected{% endif %}>Residencial</option>
+            <option value="comercial" {% if edificio.tipo == "comercial" %}selected{% endif %}>Comercial</option>
+        </select><br>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Volver al Inicio</a>
+</body>
+</html>

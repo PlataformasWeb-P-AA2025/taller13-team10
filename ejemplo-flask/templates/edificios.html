@@ -28,20 +28,29 @@
                         <th>Dirección</th>
                         <th>Ciudad</th>
                         <th>Tipo</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for edificio in edificios %}
                     <tr>
-                        <td>{{ edificio.id }}</td>
+                        <td>{{ edificio.id if edificio.id is defined else edificio.pk if edificio.pk is defined else '' }}</td>
                         <td>{{ edificio.nombre }}</td>
                         <td>{{ edificio.direccion }}</td>
                         <td>{{ edificio.ciudad }}</td>
                         <td>{{ edificio.tipo }}</td>
+                        <td>
+                            {% if edificio.id is defined %}
+                            <a href="{{ url_for('editar_edificio', edificio_id=edificio.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ url_for('eliminar_edificio', edificio_id=edificio.id) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este edificio?');">Eliminar</button>
+                            </form>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="5" class="text-center">No hay edificios disponibles</td>
+                        <td colspan="6" class="text-center">No hay edificios disponibles</td>
                     </tr>
                     {% endfor %}
                 </tbody>
